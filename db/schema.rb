@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128032443) do
+ActiveRecord::Schema.define(version: 20150201205943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,19 @@ ActiveRecord::Schema.define(version: 20150128032443) do
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
+  create_table "friendly_id_slugs", force: true do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
   create_table "likes", force: true do |t|
     t.string   "liker_type"
     t.integer  "liker_id"
@@ -72,14 +85,6 @@ ActiveRecord::Schema.define(version: 20150128032443) do
 
   add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables", using: :btree
   add_index "likes", ["liker_id", "liker_type"], name: "fk_likes", using: :btree
-
-  create_table "pg_search_documents", force: true do |t|
-    t.text     "content"
-    t.integer  "searchable_id"
-    t.string   "searchable_type"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -123,10 +128,12 @@ ActiveRecord::Schema.define(version: 20150128032443) do
     t.string   "provider"
     t.string   "uid"
     t.boolean  "is_venue",               default: false
+    t.string   "slug"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
   create_table "venues", force: true do |t|
     t.string   "name"
@@ -142,16 +149,18 @@ ActiveRecord::Schema.define(version: 20150128032443) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "contact"
+    t.integer  "user_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.integer  "user_id"
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
     t.string   "zip"
+    t.string   "slug"
   end
 
+  add_index "venues", ["slug"], name: "index_venues_on_slug", unique: true, using: :btree
   add_index "venues", ["user_id"], name: "index_venues_on_user_id", using: :btree
 
   create_table "works", force: true do |t|
