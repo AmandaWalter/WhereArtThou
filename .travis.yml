@@ -11,7 +11,7 @@ script:
 - bundle exec rake
 # deploy:
 #   provider: heroku
-#   api_key:58ce72f1-d227-4264-aed8-775a8cd8b38d
+#   api:
 #   app: whereartthou
 #   on:
 #     repo: AmandaWalter/WhereArtThou
