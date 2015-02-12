@@ -27,8 +27,8 @@ development:
 
 test:
   <<: *default
-  database: WhereArtThou_test
-  username: WhereArtThou
+  database: travis_ci_test
+  username: postgres
 
 production:
   <<: *default
