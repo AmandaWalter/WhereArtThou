@@ -9,3 +9,12 @@ before_script:
 script:
 - RAILS_ENV=test bundle exec rake db:migrate --trace
 - bundle exec rake
+# deploy:
+#   provider: heroku
+#   api_key:58ce72f1-d227-4264-aed8-775a8cd8b38d
+#   app: whereartthou
+#   on:
+#     repo: AmandaWalter/WhereArtThou
+#   run:
+#   - "rake db:migrate"
+#   - "rake cleanup"
