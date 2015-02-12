@@ -1,17 +1,20 @@
 language: ruby
+cache: bundler
 rvm:
-  - 2.1.5
+- 2.1.5
+addons:
+  postgresql: '9.3'
 before_script:
-  - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database WhereArtThou_test' -U postgres
-script: 
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-  - bundle exec rake db:test:prepare
-  - bundle exec rake
+- psql -c 'create database travis_ci_test;' -U postgres
+script:
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake
 # deploy:
 #   provider: heroku
-#   api_key:
-#     secure: DEC/97nZt03vcAy++bSAWcMAnSOlTc8deA9nxzWgpKWknJtiDPNnV3jYnZzUyrFrZHHXbILo80k7LO3fqqSel2MpJ3DE/FYSBBroiNTihbxHdesJM0nCC0gGutr+CjM+CXoNTHo2Up4mShLlaMcGnOr6x2NAXi8781omgseniF4=
-#     run:
-#     - "rake db:migrate"
-#     - "rake cleanup"
+#   api_key:58ce72f1-d227-4264-aed8-775a8cd8b38d
+#   app: whereartthou
+#   on:
+#     repo: AmandaWalter/WhereArtThou
+#   run:
+#   - "rake db:migrate"
+#   - "rake cleanup"
