@@ -2,7 +2,7 @@ language: ruby
 rvm:
   - 2.1.5
 before_script:
-  - psql -c 'create database WhereArtThou_test' -U postgres
+  - psql -c 'create database WhereArtThou_test' -U WhereArtThou
 script: 
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake
