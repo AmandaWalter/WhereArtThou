@@ -49,15 +49,14 @@ describe EventsController do
       @request.env["devise.mapping"] = Devise.mappings[:user]
       user = FactoryGirl.create(:user333)
       sign_in user
-
     end
     context 'valid attributes' do
       it 'locates the requested @event' do
-        patch :update, :venue_id => @event.venue_id, :id => @event.id, event: attributes_for(:event)
+        patch :update, {venue_id: @event.venue_id, id: @event.id, event: attributes_for(:event)}
         expect(assigns(:event)).to eq(@event)
       end
       it 'changes event attributes' do
-        patch :update, :venue_id => @event.venue_id, id: => @event.id, event: attributes_for(:event,
+        patch :update, venue_id: @event.venue_id, id: @event.id, event: attributes_for(:event,
             name: 'new name',
             address: 'new address',
             city: 'new city',
@@ -69,31 +68,48 @@ describe EventsController do
           expect(@event.state).to eq('new state')
       end
       it 'redirects to the assigned venue' do
-        patch :update, :venue_id => @event.venue_id, id: @event.id, event: attributes_for(:event)
+        patch :update, {venue_id: @event.venue_id, id: @event.id, event: attributes_for(:event)}
         expect(response).to redirect_to @venue
       end
     end
-
     context 'invalid attributes' do
       it 'locates the requested event' do
-      put :update, venue_id: @venue.id, id: @work.id, 
-        work: FactoryGirl.attributes_for(:invalid_event)
-      expect(assigns(:work)).to eq(@work)
+        patch :update, :venue_id => @event.venue_id, :id => @event.id, 
+        event: FactoryGirl.attributes_for(:invalid_event)
+      expect(assigns(:event)).to eq(@event)
       end
       it 'does not change event attributes' do
-        put :update, venue_id: @venue.id, id: @work.id, 
-          work: FactoryGirl.attributes_for(:invalid_event)
+        patch :update, :venue_id => @event.venue_id, :id => @event.id, 
+        event: FactoryGirl.attributes_for(:invalid_event)
         @event.reload
-        expect(@event.name).to eq('Art show') 
-        expect(@event.address).to eq('700 e 600 s')
-        expect(@event.city).to eq('Salt Lake City')
+        expect(@event.name).to eq('ArtEvent') 
+        expect(@event.address).to eq('9350 South 150 East #575')
+        expect(@event.city).to eq('Sandy')
         expect(@event.state).to eq('UT')
       end
       it 're-renders the edit page' do
-        put :update, venue_id: @venue.id, id: @work.id, 
-          work: FactoryGirl.attributes_for(:invalid_work)
+        put :update, :venue_id => @event.venue_id, :id => @event.id, 
+        event: FactoryGirl.attributes_for(:invalid_event)
         expect(response).to render_template :edit
       end
+    end
+  end
+  describe 'DELETE #destroy' do
+    before :each do
+      @venue = FactoryGirl.create(:venue12)
+      @event = FactoryGirl.create(:event)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      user = FactoryGirl.create(:user333)
+      sign_in user
+    end
+    it "deletes the contact" do
+      expect {
+        delete :destroy, {venue_id: @event.venue_id, id: @event.id}
+      }.to change(Event,:count).by(-1)
+    end
+    it "redirects to contacts#index" do
+      delete :destroy, {venue_id: @event.venue_id, id: @event.id}
+      expect(response).to redirect_to venue_path(@venue)
     end
   end
 end
