@@ -2,4 +2,4 @@
 
 Art. Accessible.
 
-See it on [Heroku](http://whereartthou.herokuapp.com/)
+See it at [(http://www.whereartthou.co)]
