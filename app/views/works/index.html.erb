@@ -42,14 +42,16 @@
 				</div>
 
 		    <div role="tabpanel" class="tab-pane" id="artists">
-			    	<h2 class='col-md-4'>Artists</h2>
+		    	<div class='top-row'>
+			    	<h2 class='col-md-4 tab-inner-title'>Artists</h2>
 			    	<div class='col-md-8'>
 				    <%= form_tag works_path, class: "navbar-form navbar-right search-bar", role: "search", method: "get" do %>
 					    <div class="form-group">
 					      <%= text_field_tag :search,"", class: "form-control in-panel", placeholder: "Search Here" %>
 					    </div>
-					   <%= submit_tag "SEARCH", class: "btn btn-default hpbutton" %>
+					   		<%= submit_tag "SEARCH", class: "btn btn-default hpbutton art-fit" %>
 					  <% end %>
+				  	</div>
 				  </div>
 			  <div class='spacer col-md-12'>
 			  </div>
