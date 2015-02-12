@@ -3,12 +3,14 @@
     <div class="col-md-5">
       <div>
         <%= image_tag(@artist.user.photo(:avatar), class: "artist-thumb") %>
-      </div>  
-      <%= link_to (fa_icon "facebook"), @artist.facebook if @artist.facebook %>
-      <%= link_to (fa_icon "twitter"), @artist.twitter if @artist.twitter %> 
-      <%= link_to (fa_icon "instagram"), @artist.instagram if @artist.instagram %>
-      <%= link_to (fa_icon "globe"), @artist.website if @artist.website %>
-      <%= link_to (fa_icon "envelope"), @artist.instagram if @artist.instagram %><br>
+      </div>
+        
+      <%= link_to (fa_icon "facebook"), "https://" + @artist.facebook if @artist.facebook && @artist.facebook.length > 8 %>
+      <%= link_to (fa_icon "twitter"), "https://www.twitter.com/" + @artist.twitter if @artist.twitter && @artist.twitter.length > 3 %> 
+      <%= link_to (fa_icon "instagram"), "https://www.instagram.com/" + @artist.instagram if @artist.instagram && @artist.instagram.length > 3 %>
+      <%= link_to (fa_icon "globe"), @artist.website if @artist.website && @artist.website.length > 5 %>
+      <%= link_to (fa_icon "envelope"), '#'  %>
+      <br>
       <%= link_to 'View Artist Gallery', artist_path, class: "btn btn-success btn-lg user-button artist-gallery-btn" %>
       <% if @artist.user == current_user %>
         <%= link_to 'Edit Profile', edit_user_registration_path(:artist => true), class: "btn btn-success btn-lg hpbutton" %>

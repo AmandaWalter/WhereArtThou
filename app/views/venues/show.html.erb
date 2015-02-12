@@ -6,10 +6,10 @@
 		
 		<h2 class="venue-name heading-font-dark"><%= @venue.name %></h2>
 		<div class='link-icons'>
-			<%= link_to (fa_icon "facebook 2x"), "http://#{@venue.facebook}" if @venue.facebook %>
-	    <%= link_to (fa_icon "twitter 2x"), "http://twitter.com/#{@venue.twitter}" if @venue.twitter %> 
-	    <%= link_to (fa_icon "instagram 2x"), "http://instagram.com/#{@venue.instagram}" if @venue.instagram %>
-	    <%= link_to (fa_icon "globe 2x"), "http://#{@venue.website}" if @venue.instagram %>
+			<%= link_to (fa_icon "facebook 2x"), "http://#{@venue.facebook}" if @venue.facebook && @venue.facebook.length > 8 %>
+	    <%= link_to (fa_icon "twitter 2x"), "http://twitter.com/#{@venue.twitter}" if @venue.twitter && @venue.facebook.length > 3 %> 
+	    <%= link_to (fa_icon "instagram 2x"), "http://instagram.com/#{@venue.instagram}" if @venue.instagram && @venue.facebook.length > 3 %>
+	    <%= link_to (fa_icon "globe 2x"), "http://#{@venue.website}" if @venue.website && @venue.website.length > 5 %>
 	    <% if @venue.user == current_user %>
 				<div id='venue-logged-in-buttons'>
 				<%= link_to 'New Event', new_venue_event_path(@venue), class: "btn btn-success btn-lg hpbutton" %>

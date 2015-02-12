@@ -15,6 +15,7 @@
 		  <div class="tab-content col-md-5">
 
 		    <div role="tabpanel" class="tab-pane active" id="works">
+		    	<div class='top-row'>
 			    	<h2 class='col-md-4 '>Artwork</h2>
 				    <div class='col-md-8'>
 					    <%= form_tag works_path, class: "navbar-form navbar-right search-bar", role: "search", method: "get" do %>
@@ -24,6 +25,7 @@
 						   <%= submit_tag "SEARCH", class: "btn btn-default hpbutton" %>
 						  <% end %>
 						</div>
+					</div>
 					<div class='spacer col-md-12'>
 			  	</div>
 					<% @works.each do |work| %>
