@@ -8,10 +8,10 @@ before_script:
 script: 
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake
-# deploy:
-#   provider: heroku
-#   api_key:
-#     secure: DEC/97nZt03vcAy++bSAWcMAnSOlTc8deA9nxzWgpKWknJtiDPNnV3jYnZzUyrFrZHHXbILo80k7LO3fqqSel2MpJ3DE/FYSBBroiNTihbxHdesJM0nCC0gGutr+CjM+CXoNTHo2Up4mShLlaMcGnOr6x2NAXi8781omgseniF4=
-#     run:
-#     - "rake db:migrate"
-#     - "rake cleanup"
+deploy:
+  provider: heroku
+  api_key:
+    secure: DEC/97nZt03vcAy++bSAWcMAnSOlTc8deA9nxzWgpKWknJtiDPNnV3jYnZzUyrFrZHHXbILo80k7LO3fqqSel2MpJ3DE/FYSBBroiNTihbxHdesJM0nCC0gGutr+CjM+CXoNTHo2Up4mShLlaMcGnOr6x2NAXi8781omgseniF4=
+    run:
+    - "rake db:migrate"
+    - "rake cleanup"
