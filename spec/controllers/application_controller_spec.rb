@@ -12,24 +12,14 @@ RSpec.describe ApplicationController, :type => :controller do
     end
     context 'user is an artist' do
       it 'finds the correct artist' do
-        expect(@user333.artist_id).to eq()
-      end
-      it 'redirects to the correct artist path' do
-        expect(response).to redirect_to artist_path(@artist)
+        expect(@artist.user_id).to eq(@user333.id)
       end
     end
+
     context 'user is a venue' do
-      it 'finds the correct artist' do
-        expect (@user444.id).to eq(@venue.user_id)
+      it 'finds the correct venue' do
+        expect(@venue.user_id).to eq(@user444.id)
       end
-      it 'redirects to the correct venue path' do
-        expect(response).to redirect_to venue_path(@venue)
-      end
-    end
-    context 'user is a user' do
-      it 'redirects to correct user path' do
-      expect(response).to redirect_to user_path(@user222)
-    end
     end
   end
 end

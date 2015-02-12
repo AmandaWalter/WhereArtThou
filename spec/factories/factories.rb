@@ -64,10 +64,11 @@ FactoryGirl.define do
     email 'email444@yahoo.com'
     username 'Place Fakerson'
     password 'password'
-    id 4999
+    id 444
     is_venue true
     is_artist false
   end
+  
   factory :venue604, class: Venue do
     id 666
     user_id 444
@@ -83,6 +84,6 @@ FactoryGirl.define do
   end
   factory :artist503, class: Artist do
     id 500
-    user_id 333
+    user_id 2999
   end
 end
